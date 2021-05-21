@@ -4,7 +4,7 @@
         <div class="md:w-5/6 bg-blue-500 flex items-stretch py-2 rounded px-4 content-between justify-between">
             <div class="flex flex-row">
                 <router-link to="/">
-                    <i class="far fa-play-circle md:text-5xl text-3xl text-white text-center"></i>
+                    <i class="far fa-play-circle md:text-4xl text-3xl text-white text-center"></i>
                 </router-link>
                 <router-link to="/">
                     <h3 class="md:text-3xl text-2xl text-white justify-center items-center font-semibold pl-4">JAJ link</h3>
@@ -17,8 +17,8 @@
                 </button> -->
             </div>
             <div class="">
-                <router-link to="/login">
-                    <i class="fas fa-users-cog text-white text-3xl md:text-5xl"></i>
+                <router-link to="/admin">
+                    <i class="fas fa-users-cog text-white text-3xl md:text-4xl"></i>
                 </router-link>
             </div>
         </div>

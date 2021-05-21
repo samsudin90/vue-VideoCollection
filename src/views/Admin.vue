@@ -2,9 +2,11 @@
     <div class="md:flex md:flex-row">
         <div class="w-1/12"></div>
         <div class="w-5/6">
-            <button class="m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
+            <router-link to="/create">
+                <button class="m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
+            </router-link>
             <div class="overflow-x-auto">
-                <div class="w-full bg-gray-100 justify-center items-center overflow-hidden py-2 rounded">
+                <div class="w-full bg-gray-100 justify-center items-center py-2 rounded">
                     <table class="table-auto w-full justify-between">
                         <thead>
                             <tr class="bg-gray-200 text-gray-600 text-sm leading-normal uppercase">

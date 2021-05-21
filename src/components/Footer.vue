@@ -3,7 +3,7 @@
         <div class="md:w-1/12"></div>
         <div class="md:w-5/6">
             <div class="bg-blue-500 rounded flex-">
-                <p class="text-white text-xl text-center">made by <a href="">samsudin90</a></p>
+                <p class="text-white text-base text-center">made by <a href="https://github.com/samsudin90" target="_blank" class="text-sm">samsudin90</a></p>
             </div>
         </div>
         <div class="md:w-1/12"></div>
