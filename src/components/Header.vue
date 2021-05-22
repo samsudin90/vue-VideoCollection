@@ -1,7 +1,7 @@
 <template>
     <div class="md:flex md:flex-row">
         <div class="md:w-1/12"></div>
-        <div class="md:w-5/6 bg-blue-500 flex items-stretch py-2 rounded px-4 content-between justify-between">
+        <div class="md:w-5/6 w-screen bg-blue-500 flex items-stretch py-2 rounded px-4 content-between justify-between">
             <div class="flex flex-row">
                 <router-link to="/">
                     <i class="far fa-play-circle md:text-4xl text-3xl text-white text-center"></i>
@@ -12,9 +12,6 @@
             </div>
             <div class="justify-center items-center py-2">
                 <input type="text" placeholder="cari video" class="w-20 md:w-60 focus:outline-none border-2 border-gray-100 rounded">
-                <!-- <button type="submit" class="absolute pl-3 text-white">
-                    <i class="fas fa-search"></i>
-                </button> -->
             </div>
             <div class="">
                 <router-link to="/admin">

@@ -1,7 +1,11 @@
 <template>
-    <div class="md:flex md:flex-row">
-        <div class="w-1/12"></div>
-        <div class="w-5/6">
+    <div v-if="token == ''">
+        <!-- menerima data token yang akan diproses di method -->
+        <Login @getToken="getTokenId" />
+    </div>
+    <div v-else class="md:flex md:flex-row">
+        <div class="md:w-1/12"></div>
+        <div class="md:w-5/6">
             <router-link to="/create">
                 <button class="m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
             </router-link>
@@ -60,12 +64,27 @@
                 </div>
             </div>
         </div>
-        <div class="w-1/12"></div>
+        <div class="md:w-1/12"></div>
     </div>
 </template>
 
 <script>
+import Login from './Login'
+
 export default {
-    name: 'Admin'
+    name: 'Admin',
+    components: {
+        Login
+    },
+    data() {
+        return {
+            token: ''
+        }
+    },
+    methods: {
+        getTokenId(to) {
+            this.token = to
+        }
+    }
 }
 </script>

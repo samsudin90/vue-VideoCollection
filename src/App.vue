@@ -1,6 +1,6 @@
 <template>
   <div class="justify-between flex flex-col h-screen">
-    <div class="">
+    <div class="flex-grow">
       <Header />
       <router-view/>
     </div>

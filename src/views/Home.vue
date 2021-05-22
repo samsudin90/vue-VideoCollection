@@ -1,29 +1,25 @@
 <template>
-  <div class="home md:flex md:flex-row md:pt-4 pt-1">
+  <div class="home md:flex md:flex-row md:pt-4 pt-1 flex-grow">
     <div class="md:w-1/12"></div>
     <div class="md:w-5/6">
-      <div class="text-right">
+      <div class="md:text-right">
         <select name="" id="" class="rounded border-gray-500">
           <option value="">terbaru</option>
           <option value="">terlama</option>
         </select>
       </div>
       <hr class="divide-solid pt-2">
-      <div class="md:flex-col grid md:grid-flow-col md:grid-cols-2 px-1 justify-items-stretch items-stretch md:space-x-2">
-        <div class="flex-row flex md:w-1/5 py-3">
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" class="w-40"></iframe>
-          <div class="px-4">
-            <router-link to="/detail">
-              <p class="text-2xl font-semibold">lofi hip hop radio - beats to relax/study to</p>
-            </router-link>
+      <div v-for="d in data" :key="d.id" class="w-full md:h-72 md:px-4 md:pt-4 border-gray-100 border-2 rounded shadow md:mb-4 hover:bg-gray-200">
+        <router-link :to="{ name: 'Detail', params: {id: d.id}}">
+          <div class="flex flex-row">
+            <iframe class="md:h-60 md:w-96 h-24 w-32" src="https://www.youtube.com/embed/VfNqA2ukNrk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+            <div class="flex flex-col px-4">
+              <p class="md:text-xl text-base font-bold md:pt-3">{{d.judul}}</p>
+              <p class="text-xs font-light md:pt-4">{{d.deskripsi}}</p>
+            </div>
           </div>
-        </div>
-        <div class="flex-row flex md:w-1/5 md:border-2">
-        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" frameborder="0" class="w-40"></iframe>
-          <div class="px-4">
-            <p class="text-2xl font-semibold">lofi hip hop radio - beats to relax/study to</p>
-          </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <div class="md:w-1/12"></div>
@@ -36,6 +32,23 @@
 export default {
   name: 'Home',
   components: {
+  },
+  data() {
+    return {
+      data: []
+    }
+  },
+  methods: {
+    async fetchData(){
+      const res = await fetch("http://127.0.0.1:8000/api/content")
+      const data = await res.json()
+      console.log(data)
+      return data
+    }
+  },
+  async created() {
+    const data = await this.fetchData()
+    this.data = data.data
   }
 }
 </script>
