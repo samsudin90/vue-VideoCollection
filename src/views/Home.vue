@@ -1,5 +1,10 @@
 <template>
-  <div class="home md:flex md:flex-row md:pt-4 pt-1 flex-grow">
+  <div v-if="loading == true">
+    <div class="text-center flex flex-col justify-center items-center content-center h-screen">
+      <img src="@/assets/loading.gif">
+    </div>
+  </div>
+  <div v-else class="home md:flex md:flex-row md:pt-4 pt-1 flex-grow">
     <div class="md:w-1/12"></div>
     <div class="md:w-5/6">
       <div class="md:text-right">
@@ -35,7 +40,8 @@ export default {
   },
   data() {
     return {
-      data: []
+      data: [],
+      loading: true
     }
   },
   methods: {
@@ -49,6 +55,7 @@ export default {
   async created() {
     const data = await this.fetchData()
     this.data = data.data
+    this.loading = false
   }
 }
 </script>

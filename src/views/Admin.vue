@@ -5,7 +5,12 @@
     </div>
     <div v-else class="md:flex md:flex-row">
         <div class="md:w-1/12"></div>
-        <div class="md:w-5/6">
+        <div v-if="loading == true">
+            <div class="text-center flex flex-col justify-center items-center content-center h-screen">
+            <img src="@/assets/loading.gif">
+            </div>
+        </div>
+        <div v-else class="md:w-5/6">
             <router-link to="/create">
                 <button class="m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
             </router-link>
@@ -78,13 +83,18 @@ export default {
     },
     data() {
         return {
-            token: ''
+            token: '',
+            loading: true
         }
     },
     methods: {
         getTokenId(to) {
-            this.token = to
+            return to
         }
+    },
+    created() {
+        this.token = this.getTokenId()
+        this.loading = false
     }
 }
 </script>

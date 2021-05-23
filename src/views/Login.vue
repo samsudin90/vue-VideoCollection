@@ -34,8 +34,8 @@ export default {
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          email: "admin@gmail.com",
-          password: "asawawuh"
+          email: this.email,
+          password: this.password
         })
       }
 
