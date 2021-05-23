@@ -26,41 +26,22 @@
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 text-sm font-light bg-white w-full mx-2 px-2">
-                            <tr class="border-b border-gray-200 hover:bg-gray-100 p-4 mx-2">
+                            <tr v-for="d in data" :key="d.id" class="border-b border-gray-200 hover:bg-gray-100 p-4 mx-2">
                                 <td class="p-4 justify-center items-center text-center">
-                                    <span>ini judul video</span>
+                                    <span>{{d.judul}}</span>
                                 </td>
                                 <td class="p-4 justify-center items-center text-center">
-                                    <span>www.youtube.com/embed/yYabf3kab</span>
+                                    <span>{{d.link}}</span>
                                 </td>
                                 <td class="p-4 justify-center items-center text-center">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolorem ut quis nam quo est eius quos fugit dolore dicta, tempora odio magnam mollitia vel obcaecati temporibus delectus, a aut.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit tenetur inventore, amet similique alias nulla laborum a iure possimus neque? Ab dolore voluptatibus suscipit placeat ad, dolor voluptatem provident totam.
+                                    <span>
+                                        {{d.deskripsi}}
                                     </span>
                                 </td>
                                 <td class="p-4 justify-center items-center text-center">
                                     <div class="flex items-center justify-center">
                                         <i class="fas fa-edit px-1 hover:text-green-500"></i>
-                                        <i class="fas fa-trash-alt px-1 hover:text-red-500"></i>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr class="border-b border-gray-200 hover:bg-gray-100 p-4 mx-2">
-                                <td class="p-4 justify-center items-center text-center">
-                                    <span>ini judul video</span>
-                                </td>
-                                <td class="p-4 justify-center items-center text-center">
-                                    <span>www.youtube.com/embed/yYabf3kab</span>
-                                </td>
-                                <td class="p-4 justify-center items-center text-center">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti, dolorem ut quis nam quo est eius quos fugit dolore dicta, tempora odio magnam mollitia vel obcaecati temporibus delectus, a aut.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit tenetur inventore, amet similique alias nulla laborum a iure possimus neque? Ab dolore voluptatibus suscipit placeat ad, dolor voluptatem provident totam.
-                                    </span>
-                                </td>
-                                <td class="p-4 justify-center items-center text-center">
-                                    <div class="flex items-center justify-center">
-                                        <i class="fas fa-edit px-1 hover:text-green-500"></i>
-                                        <i class="fas fa-trash-alt px-1 hover:text-red-500"></i>
+                                        <i v-on:click="del(`${d.id}`,`${token}`)" class="fas fa-trash-alt px-1 hover:text-red-500"></i>
                                     </div>
                                 </td>
                             </tr>
@@ -84,16 +65,42 @@ export default {
     data() {
         return {
             token: '',
-            loading: true
+            loading: true,
+            data: []
         }
     },
     methods: {
         getTokenId(to) {
-            return to
+            this.token = to
+            localStorage.setItem('token', to)
+        },
+        async fetchData(){
+            const res = await fetch("http://127.0.0.1:8000/api/content")
+            const data = await res.json()
+            return data
+        },
+        async del(i,t){
+            if(confirm("yakin ingin menghapusnya?")){
+                console.log(t)
+                const req = {
+                    method: "DELETE",
+                    headers: {
+                        "Accept": "application/json",
+                        "Authorization": "Bearer " + t
+                    }
+                }
+
+                const res = await fetch("http://127.0.0.1:8000/api/content/" + i, req)
+                const d = await res.json()
+                location.reload()
+                
+            }
         }
     },
-    created() {
-        this.token = this.getTokenId()
+    async created() {
+        const d =  await this.fetchData()
+        this.token = localStorage.getItem('token') || ''
+        this.data = d.data
         this.loading = false
     }
 }

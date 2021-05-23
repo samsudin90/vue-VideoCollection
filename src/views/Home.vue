@@ -17,11 +17,11 @@
       <div v-for="d in data" :key="d.id" class="w-full md:h-72 md:px-4 md:pt-4 border-gray-100 border-2 rounded shadow md:mb-4 hover:bg-gray-200">
         <router-link :to="{ name: 'Detail', params: {id: d.id}}">
           <div class="flex flex-row">
-            <iframe class="md:h-60 md:w-96 h-24 w-32" src="https://www.youtube.com/embed/VfNqA2ukNrk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            <iframe class="md:h-60 md:w-96 h-24 w-32" :src="d.link" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
             </iframe>
             <div class="flex flex-col px-4">
-              <p class="md:text-xl text-base font-bold md:pt-3">{{d.judul}}</p>
-              <p class="text-xs font-light md:pt-4">{{d.deskripsi}}</p>
+              <p class="md:text-xl text-sm font-semibold md:font-bold md:pt-3">{{d.judul}}</p>
+              <p class="text-xs font-light text-gray-500 md:pt-4">{{d.deskripsi}}</p>
             </div>
           </div>
         </router-link>

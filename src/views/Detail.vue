@@ -2,7 +2,7 @@
     <div class="md:flex md:flex-row">
         <div class="md:w-1/12"></div>
         <div class="md:w-5/6 md:p-4 p-2">
-            <iframe src="https://www.youtube.com/embed/idQBE4UJfMg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full md:h-screen h-4/6">
+            <iframe :src="data.link" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full md:h-screen h-4/6">
             </iframe>
             <h3 class="pt-4 md:text-2xl text-xl font-bold">{{data.judul}}</h3>
             <p class="pt-2 text-sm">{{data.deskripsi}}</p>
@@ -24,7 +24,6 @@ export default {
         async getDetail(){
             const res = await fetch("http://127.0.0.1:8000/api/content/" + this.id )
             const data = await res.json()
-            console.log(data)
             return data
         }
     },
