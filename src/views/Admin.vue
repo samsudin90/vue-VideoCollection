@@ -11,9 +11,12 @@
             </div>
         </div>
         <div v-else class="md:w-5/6">
+            <div class="flex flex-row w-full content-between justify-between">
             <router-link to="/create">
-                <button class="m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
+                <button class="flex text-left m-4 -mb-1 p-2 border-2 rounded bg-indigo-500 text-white text-xl focus:outline-none font-semibold outline-none focus:bg-indigo-800">tambah</button>
             </router-link>
+            <button v-on:click="logout" class="flex text-right border-2 bg-red-500 text-white focus:outline-none focus:bg-red-600 text-xl outline-none m-4 p-2 rounded-lg">log out</button>
+            </div>
             <div class="overflow-x-auto">
                 <div class="w-full bg-gray-100 justify-center items-center py-2 rounded">
                     <table class="table-auto w-full justify-between">
@@ -95,6 +98,20 @@ export default {
                 location.reload()
                 
             }
+        },
+        async logout(){
+            const req = {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + this.token
+                }
+            }
+            await fetch("http://127.0.0.1:8000/api/logout", req)
+            this.token = ''
+            localStorage.removeItem('token')
+            location.reload()
         }
     },
     async created() {
